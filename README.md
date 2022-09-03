@@ -4,3 +4,8 @@
 
 ## Feature
 - Google Map Click Event : 사용자가 지정한 위치의 좌표를 획득한다.
+    - 지정 위치에 마커 추가 기능.
+    - Default Position : 서울
+
+## TO DO
+- 마커를 클릭 시 메뉴를 표시.
