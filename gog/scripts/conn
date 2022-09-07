@@ -1,0 +1,7 @@
+docker run -it --rm \
+    --name gog \
+    -v /$(pwd):/app \
+    --privileged \
+    -p 3000:3000 \
+    gog:latest \
+    bash
