@@ -17,7 +17,7 @@ def pythagoras(origin: tuple, target: tuple, r: float) -> bool:
     else:
         return False
 
-def myHaversine(sX, sY, tX, tY):
+def myHaversine(sX: float, sY: float, tX: float, tY: float) -> float:
     radius = 6371
     radian = math.pi / 180
 
@@ -36,7 +36,7 @@ def myHaversine(sX, sY, tX, tY):
     return distance
 
 # dev
-def find_gps(k, n_km):
+def find_gps(k: int, n_km: int) -> None:
     start = time.time()
 
     # 0-1. 랜덤한 파일 하나 선정.
@@ -60,6 +60,7 @@ def find_gps(k, n_km):
 
     # Haversine Distance 계산
     # Haversine Distance 모듈과 비교
+    cal_time = time.time()
     distance = myHaversine(
         source_raw.lat,
         source_raw.lon,
@@ -67,13 +68,17 @@ def find_gps(k, n_km):
         target_raw.lon
     )
     print("\nMy Distance : {}".format(distance))
+    print("MyHaversine 계산 시간 : {}".format(time.time() - cal_time))
+
+    cal_time = time.time()
     m_distance = haversine(
         (source_raw.lat, source_raw.lon),
         (target_raw.lat, target_raw.lon),
         unit="km"
     )
     print("Module Distance : {}".format(m_distance))
-    print("My Func VS Modlue Func : {}".format(abs(distance - m_distance)))
+    print("Haversine Module 계산 시간 : {}".format(time.time() - cal_time))
+    print("My Func VS Module Func : {}".format(abs(distance - m_distance)))
 
     # source h3와 이웃한 주변 h3 구하기.
     neighbors = h3.k_ring(source_fname, k)
@@ -101,8 +106,18 @@ def find_gps(k, n_km):
                         tXYs.append((target_raw.lat, target_raw.lon))
         except FileNotFoundError:
             print("{} is not found.".format(neighbor))
+
     # tXYs의 개수 구하기.
     print("\ntXYs Counts : {}".format(len(tXYs)))
+    for i, tXY in enumerate(tXYs):
+        if i % 10 == 0:
+            distance = myHaversine(
+                source_raw.lat,
+                source_raw.lon,
+                tXY[0],
+                tXY[1]
+            )
+            print("lat : {}, lon : {} 과 Source와의 거리 {}".format(tXY[0], tXY[1], distance))
 
     print("\n================= execute 시간 계산 ==================\n{}\n" \
         .format(time.time() - start))
@@ -111,6 +126,7 @@ def execute():
     find_gps(1, 10)
     find_gps(2, 20)
     find_gps(3, 30)
+
 
 if __name__=="__main__":
     execute()
