@@ -15,3 +15,6 @@ GPS of GPS 데이터 전처리 프로세스
     - 현재까지 확보한 H3와 동일한 파일명을 가진 데이터 중 n km 내의 좌표를 획득.
     - find_gps로 프로세스는 구현 완료. (~2022.09.25)
     - 프로세스 실행 시간은 0.2~0.4초 정도로 측정됨.
+
+## Maps created with folium (example)
+![45.263427 9.592665](./examples/img/example.png)  
