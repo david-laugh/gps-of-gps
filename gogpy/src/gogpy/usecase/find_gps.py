@@ -122,6 +122,8 @@ def find_gps(k: int, n_km: int) -> None:
     print("\n================= execute 시간 계산 ==================\n{}\n" \
         .format(time.time() - start))
 
+    return source_raw.lat, source_raw.lon, tXYs
+
 def execute():
     find_gps(1, 10)
     find_gps(2, 20)
