@@ -5,6 +5,8 @@ import folium
 import numpy as np
 import pandas as pd
 
+from gogpy.usecase.find_gps import find_gps
+
 
 def myHaversine(sX, sY, tX, tY):
     radius = 6371
@@ -24,46 +26,87 @@ def myHaversine(sX, sY, tX, tY):
 
     return distance
 
+def azimuth(sX, sY, tX, tY):
+    """
+    https://www.movable-type.co.uk/scripts/latlong.html
+    """
+    y = math.sin((tY * math.pi / 180) - (sY * math.pi / 180)) * math.cos(tX * math.pi / 180)
+    x = math.cos(sX * math.pi / 180) \
+        * math.sin(tX * math.pi / 180) \
+        - math.sin(sX * math.pi / 180) \
+        * math.cos(tX * math.pi / 180) \
+        * math.cos(tY * math.pi / 180 - sY * math.pi / 180)
+    a = math.atan2(y, x)
+    bearing = (a * 180 / math.pi + 360) % 360
+
+    return bearing
+
+
 def execute():
-    df = pd.read_csv('./results.csv')
-    print("df 행 수 : {}".format(len(df)))
-    df = df.sample(frac=0.01)
-    print(df.head())
+    slat, slon, tXYs = find_gps(6, 100)
+    # for i in range(1, 4):
+    #     print("{} {}에서 {} {} : 방위각 {}" \
+    #         .format(
+    #             slat, slon, tXYs[i][0], tXYs[i][1],
+    #             azimuth(slat, slon, tXYs[i][0], tXYs[i][1])
+    #         )
+    #     )
 
-    avg_lat = df['latitude'].mean()
-    avg_lon = df['longitude'].mean()
+    map = folium.Map(location=[slat, slon], zoom_start=9)
 
-    distance = []
-    for n in df.index:
-        d = myHaversine(avg_lat, avg_lon, df['latitude'][n], df['longitude'][n])
-        distance.append(d*1000)
+    tooltip = "Source Lat, Lon"
+    folium.Marker(
+        [slat, slon],
+        popup="{} {}".format(slat, slon),
+        tooltip=tooltip
+    ).add_to(map)
 
-    final_degree = []
-    for n in df.index:
-        r = math.atan(
-            (df['latitude'][n]-avg_lat) / (df['longitude'][n]-avg_lon)
-        ) 
-        degree = (r * 180) / math.pi
-
-        if df['longitude'][n]>avg_lon:
-            fd = 90 - degree
+    for tXY in tXYs:
+        angle = azimuth(slat, slon, tXY[0], tXY[1])
+        distance = myHaversine(slat, slon, tXY[0], tXY[1])
+        if 0 < angle and angle <= 90:
+            if 0 <= distance and angle < 20:
+                folium.CircleMarker(
+                    [tXY[0], tXY[1]], radius=0.1, 
+                    color='#D2B4DE', fill_color='#D2B4DE'
+                ).add_to(map)
+            if 20 <= distance and angle < 40:
+                folium.CircleMarker(
+                    [tXY[0], tXY[1]], radius=0.1, 
+                    color='#A569BD', fill_color='#A569BD'
+                ).add_to(map)
+            if 40 <= distance and angle < 60:
+                folium.CircleMarker(
+                    [tXY[0], tXY[1]], radius=0.1, 
+                    color='#7D3C98', fill_color='#7D3C98'
+                ).add_to(map)
+            if 60 <= distance and angle < 80:
+                folium.CircleMarker(
+                    [tXY[0], tXY[1]], radius=0.1, 
+                    color='#6C3483', fill_color='#6C3483'
+                ).add_to(map)
+            if 80 <= distance and angle < 100:
+                folium.CircleMarker(
+                    [tXY[0], tXY[1]], radius=0.1, 
+                    color='#4A235A', fill_color='#4A235A'
+                ).add_to(map)
+        elif 90 < angle and angle <= 180:
+            folium.CircleMarker(
+                [tXY[0], tXY[1]], radius=0.1, 
+                color='#6495ED', fill_color='#6495ED'
+            ).add_to(map)
+        elif 180 < angle and angle <= 270:
+            folium.CircleMarker(
+                [tXY[0], tXY[1]], radius=0.1, 
+                color='#FF0000', fill_color='#FF0000'
+            ).add_to(map)
         else:
-            fd = 270 - degree
-        final_degree.append(fd)
- 
-    # 다트형 공간 분할.
+            folium.CircleMarker(
+                [tXY[0], tXY[1]], radius=0.1, 
+                color='#6495ED', fill_color='#6495ED'
+            ).add_to(map)
 
-    # sample
-    # map = folium.Map(location=[avg_lat, avg_lon], zoom_start=16)
-    # for n in df2.index:
-    #     folium.CircleMarker(
-    #         [df2['latitude'][n], df2['longitude'][n]],
-    #         radius=(df2['count'][n])/20, 
-    #         color='#990000',
-    #         fill_color='#3186cc'
-    #     ).add_to(map)
-    # map.save("index3.html")
-
+    map.save("./examples/dart.html")
 
 
 if __name__=="__main__":
