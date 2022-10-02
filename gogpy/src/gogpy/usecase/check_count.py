@@ -1,17 +1,26 @@
 import os
 
 
-if __name__ == "__main__":
-    dir_name = "./art3_USA_CA"
+"""
+총 데이터 수 확인하기.
+"""
+def execute():
+    # raw : 원시 데이터
+    # gps of gps의 원시 데이터 경로
+    dir_name = "./datalake/raw"
 
-    count_a = 0
+    count = 0
     for filename in os.listdir(dir_name):
+        print(filename)
         with open(dir_name + "/" + filename, "r") as f:
-            count_a += len(f.readlines()) - 1
+            """
+            첫 헤더라인 수 제거.
+            """
+            count += len(f.readlines()) - 1
 
-    count_b = 0
-    for filename in os.listdir("datalake"):
-        with open("datalake" + "/" + filename, "r") as f:
-            count_b += len(f.readlines()) - 1
+    print("데이터 수 : {}".format(count))
+    # 377,347,200
 
-    print("a : {}, b : {}".format(count_a, count_b))
+
+if __name__ == "__main__":
+    execute()
