@@ -1,20 +1,21 @@
 import click
 
-from .test import test
+from .check import check
 
 
-CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
-
-
-@click.group(context_settings=CONTEXT_SETTINGS)
+@click.group()
 def cli():
     """
-    Desrciption
+    It is a Command Line
+    for efficient process management
+    of gps-of-gps.
 
     \b
-    Action Commands:
-        test  [options]
+    Commands:
+        check
+        create [Options]
+        find [Options]
     """
     pass
 
-cli.add_command(test)
+cli.add_command(check)
