@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 
@@ -5,6 +6,7 @@ import mariadb
 import h3
 
 from gogpy.data.raw import Raw
+
 
 """
 Refer to
@@ -53,7 +55,7 @@ def execute():
             host = "127.0.0.1",
             port = 3306,
             user = "root",
-            password = "YOUR_PASSWORD"
+            password = "YOUR PASSWORD"
         )
 
         # Instantiate Cursor
@@ -61,31 +63,32 @@ def execute():
 
         create_database(cur, "sample")
 
-        with open("YOUR_DATA", "r", encoding="UTF-8") as f:
-            for line in f.readlines()[1:]:
-                source_raw = Raw(line)
-                h3_code = h3.geo_to_h3(source_raw.lat, source_raw.lon, 5)
+        for fname in os.listdir('YOUR DIR')[1:10]:
+            with open("YOUR DIR" + fname, "r", encoding="UTF-8") as f:
+                for line in f.readlines()[1:]:
+                    source_raw = Raw(line)
+                    h3_code = h3.geo_to_h3(source_raw.lat, source_raw.lon, 5)
 
-                create_table(cur, "sample", h3_code)
-                try:
-                    add_contact(
-                        cur, "sample", h3_code,
-                        source_raw.id,
-                        source_raw.user_id_str,
-                        source_raw.user_lang,
-                        source_raw.lat,
-                        source_raw.lon,
-                        source_raw.country_code,
-                        source_raw.cdate,
-                        source_raw.device
-                    )
-                except:
-                    pass
-        # Close Connection
+                    create_table(cur, "sample", h3_code)
+                    try:
+                        add_contact(
+                            cur, "sample", h3_code,
+                            source_raw.id,
+                            source_raw.user_id_str,
+                            source_raw.user_lang,
+                            source_raw.lat,
+                            source_raw.lon,
+                            source_raw.country_code,
+                            source_raw.cdate,
+                            source_raw.device
+                        )
+                    except:
+                        pass
+            # Close Connection
+
+            print("소요 시간 : {}".format(time.time() - start))
+
         conn.close()
-
-        print("소요 시간 : {}".format(time.time() - start))
-
     except mariadb.Error as e:
         print(f"Error connecting to the database: {e}")
         sys.exit(1)
