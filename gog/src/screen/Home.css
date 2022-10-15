@@ -1,0 +1,45 @@
+.logo {
+  display: flex;
+  align-items: center;
+
+  background-color: #fbf6ed;
+  /* opacity: 0.7; */
+  height: 3em;
+}
+#logo-txt {
+  padding-left: 1.2em;
+  color: #3b3936;
+}
+.option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1em;
+}
+.coordinate,
+.angle {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1em;
+}
+#coordinate-txt,
+#angle-txt {
+  font-weight: 700;
+  margin-right: 0.5em;
+}
+
+.btn {
+  background-color: #04aa6d;
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  height: 2.5em;
+
+  margin: 0.5em 3em;
+  padding: 0 1.5em;
+
+  font-weight: 700;
+}
+.btn:hover {
+  background-color: #016641;
+}
