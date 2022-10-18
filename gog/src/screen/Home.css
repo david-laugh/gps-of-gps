@@ -10,52 +10,82 @@
   padding-left: 1.2em;
   color: #3b3936;
 }
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+.maps {
+  grid-column: 1;
+  grid-row: 1;
+}
 .option {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 1em;
+  grid-column: 2;
+  grid-row: 1;
+
+  margin: 2em 1.5em;
 }
-.coordinate,
-.angle {
-  display: flex;
-  flex-direction: row;
-  margin-left: 1em;
-}
+
 #coordinate-txt,
 #angle-txt {
   font-weight: 700;
   margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  color: #3b3936;
+}
+#coordinate,
+#angle {
+  margin-left: 0.5em;
+}
+#angle {
+  display: flex;
+  flex-direction: column;
+}
+input[type="radio"] {
+  margin: 0.5em;
+}
+.degree-angle label {
+  margin-left: 0.5em;
+}
+hr {
+  border: none;
+  border-top: 1px solid rgb(175, 175, 175);
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+}
+
+datalist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  writing-mode: horizontal-tb;
+  width: 200px;
+}
+option {
+  padding: 0;
+}
+input[type="range"] {
+  width: 200px;
+  margin: 0;
 }
 
 .btn {
   background-color: #04aa6d;
   color: #fff;
   border: none;
-  border-radius: 0.5em;
-  height: 2.5em;
+  border-radius: 5em;
+  height: 2.8em;
 
-  margin: 0.5em 3em;
-  padding: 0 1.5em;
+  float: right;
+  margin: 5em 0.5em 3em;
+  padding: 0 1.8em;
 
+  font-size: medium;
   font-weight: 700;
 }
 .btn:hover {
   background-color: #016641;
 }
-/* datalist {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  writing-mode: vertical-lr;
-  width: 200px;
-}
-
-option {
-  padding: 0;
-}
-
-input[type="range"] {
-  width: 200px;
-  margin: 0;
-} */
