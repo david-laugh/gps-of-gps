@@ -1,46 +1,41 @@
 import React, { Component } from 'react';
 import { MapContainer, TileLayer, Circle } from 'react-leaflet';
+import axios from 'axios';
 
 
 class Maps extends Component {
     constructor() {
         super();
         this.state = {
-            lat: 37.600381,
-            lng: 127.029889,
-            zoom: 15,
+            lat: 48.06869406823506,
+            lng: 3.74459769969682,
+            zoom: 12,
             color: '#000000',
-            data: []
+            data: [],
         };
     }
 
-    drawDartMap() {
-        const { data } = this.state;
-        this.setState({data: [...data, 
-            {
-                lat: 37.600381,
-                lon: 127.029899,
-                color: '#FFFF00',
-                radius: 200
-            },
-            {
-                lat: 37.600381,
-                lon: 127.039879,
-                color: '#000000',
-                radius: 200
-            },
-            {
-                lat: 37.610381,
-                lon: 127.039869,
-                color: '#000000',
-                radius: 200
-            }
-        ]
-        });
+    async _getData() {
+        const response = await axios.get(
+          'http://127.0.0.1:3300/'
+        );
+        const dots = [];
+        const items = response.data;
+        for (let i = 0; i < items.length; i++){
+            dots.push(
+                {
+                    lat: items[i]["lat"],
+                    lon: items[i]["lon"],
+                    color: '#FF0000',
+                    radius: 200
+                }
+            );
+        }
+        this.setState({data: dots});
     }
 
     componentDidMount() {
-        this.drawDartMap();
+        this._getData();
     }
 
     componentWillUnmount() {
