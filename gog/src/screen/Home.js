@@ -3,6 +3,21 @@ import "./Home.css";
 import Maps from "./Maps";
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleClick = (e) => {
+    console.log(e.target.value);
+  };
+  handleChange = (e) => {
+    console.log(e.target.value);
+  };
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log("click");
+  }
   render() {
     return (
       <div className="container">
@@ -15,7 +30,7 @@ class Home extends Component {
             <div className="maps">
               <Maps></Maps>
             </div>
-            <div className="option">
+            <div className="options">
               <div className="coordinate">
                 <div id="coordinate-txt">거리(km)</div>
                 <div id="coordinate">
@@ -25,7 +40,9 @@ class Home extends Component {
                     name="temp"
                     min="10"
                     max="50"
+                    step="10"
                     list="km"
+                    onClick={this.handleClick}
                   />
                   <datalist id="km">
                     <option value="10" label="10"></option>
@@ -46,7 +63,8 @@ class Home extends Component {
                       id="30-degree-angle"
                       name="degree-angle"
                       value="30-degree-angle"
-                      checked
+                      onChange={this.handleChange}
+                      defaultChecked
                     ></input>
                     <label for="30-degree-angle">30°</label>
                   </div>
@@ -56,6 +74,7 @@ class Home extends Component {
                       id="60-degree-angle"
                       name="degree-angle"
                       value="60-degree-angle"
+                      onChange={this.handleChange}
                     ></input>
                     <label for="60-degree-angle">60°</label>
                   </div>
@@ -65,6 +84,7 @@ class Home extends Component {
                       id="90-degree-angle"
                       name="degree-angle"
                       value="90-degree-angle"
+                      onChange={this.handleChange}
                     ></input>
                     <label for="90-degree-angle">90°</label>
                   </div>
@@ -72,8 +92,13 @@ class Home extends Component {
               </div>
               {/* angle end */}
               <div className="white-box">
-                <button type="submit" className="btn">
+                <button
+                  type="submit"
+                  className="btn"
+                  onClick={this.handleSubmit}
+                >
                   Submit
+                  {this.props.value}
                 </button>
               </div>
             </div>

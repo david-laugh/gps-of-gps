@@ -1,7 +1,19 @@
 import "./Home.css";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+
+import L from "leaflet";
+import icon from "./constants";
 
 export default function Maps() {
+  // function MyComponent() {
+  //   const map = useMapEvents({
+  //     click: (e) => {
+  //       const { lat, lng } = e.latlng;
+  //       L.marker([lat, lng], { icon }).addTo(map);
+  //     },
+  //   });
+  //   return null;
+  // }
   return (
     <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
       <TileLayer
