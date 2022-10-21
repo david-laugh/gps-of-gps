@@ -45,11 +45,11 @@ class Home extends Component {
                     onClick={this.handleClick}
                   />
                   <datalist id="km">
-                    <option value="10" label="10"></option>
-                    <option value="20" label="20"></option>
-                    <option value="30" label="30"></option>
-                    <option value="40" label="40"></option>
-                    <option value="50" label="50"></option>
+                    <option value="10km" label="10"></option>
+                    <option value="20km" label="20"></option>
+                    <option value="30km" label="30"></option>
+                    <option value="40km" label="40"></option>
+                    <option value="50km" label="50"></option>
                   </datalist>
                 </div>
               </div>
@@ -62,7 +62,7 @@ class Home extends Component {
                       type="radio"
                       id="30-degree-angle"
                       name="degree-angle"
-                      value="30-degree-angle"
+                      value="30°"
                       onChange={this.handleChange}
                       defaultChecked
                     ></input>
@@ -73,7 +73,7 @@ class Home extends Component {
                       type="radio"
                       id="60-degree-angle"
                       name="degree-angle"
-                      value="60-degree-angle"
+                      value="60°"
                       onChange={this.handleChange}
                     ></input>
                     <label for="60-degree-angle">60°</label>
@@ -83,7 +83,7 @@ class Home extends Component {
                       type="radio"
                       id="90-degree-angle"
                       name="degree-angle"
-                      value="90-degree-angle"
+                      value="90°"
                       onChange={this.handleChange}
                     ></input>
                     <label for="90-degree-angle">90°</label>
