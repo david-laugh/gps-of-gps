@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { MapContainer, TileLayer, Circle } from 'react-leaflet';
 import axios from 'axios';
 
+import { azimuth, haversine } from '../utilities/math.js';
+import { getCellData } from '../utilities/cell.js';
+
 
 class Maps extends Component {
     constructor() {
@@ -21,15 +24,42 @@ class Maps extends Component {
         );
         const dots = [];
         const items = response.data;
-        for (let i = 0; i < items.length; i++){
-            dots.push(
-                {
-                    lat: items[i]["lat"],
-                    lon: items[i]["lon"],
-                    color: '#FF0000',
-                    radius: 200
+
+        const cellData = getCellData(10, 4);
+        for (let j = 0; j < cellData.length; j++) {
+            for (let i = 0; i < items.length; i++) {
+                let distance = haversine(
+                    48.06869406823506, 3.74459769969682,
+                    items[i]["lat"], items[i]["lon"]
+                );
+                let angle = azimuth(
+                    48.06869406823506, 3.74459769969682,
+                    items[i]["lat"], items[i]["lon"]
+                );
+
+                if ( angle < cellData[j][0] && distance < cellData[j][1] ) {
+                    if ( cellData[j][2] == -1 ) {
+                        dots.push(
+                            {
+                                lat: items[i]["lat"],
+                                lon: items[i]["lon"],
+                                color: '#FF0000',
+                                radius: 200
+                            }
+                        );
+                    } else {
+                        dots.push(
+                            {
+                                lat: items[i]["lat"],
+                                lon: items[i]["lon"],
+                                color: '#000000',
+                                radius: 200
+                            }
+                        );
+                        items.splice(i, 1);
+                    }
                 }
-            );
+            }
         }
         this.setState({data: dots});
     }
