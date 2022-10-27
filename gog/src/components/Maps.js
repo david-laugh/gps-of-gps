@@ -1,9 +1,10 @@
-import React from "react";
-import { MapContainer, TileLayer, useMapEvents, Popup } from "react-leaflet";
+import React, { useState } from "react";
+import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 import L from "leaflet";
-import icon from "./constants";
+import icon from "../components/Constants";
 
 export default function Maps() {
+
   function LocationMarker() {
     const map = useMapEvents({
       click: (e) => {

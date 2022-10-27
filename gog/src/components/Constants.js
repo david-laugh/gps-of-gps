@@ -1,3 +1,5 @@
+import L from "leaflet";
+
 const icon = L.icon({
   iconSize: [25, 41],
   iconAnchor: [10, 41],

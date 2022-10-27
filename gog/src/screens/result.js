@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Circle } from 'react-leaflet';
 import axios from 'axios';
 
 import { azimuth, haversine } from '../utilities/math.js';
-import { getCellData } from '../utilities/cell.js';
+import { getCellData } from '../utilities/Cell.js';
 
 
-class Maps extends Component {
-    constructor() {
-        super();
-        this.state = {
-            lat: 48.06869406823506,
-            lng: 3.74459769969682,
-            zoom: 12,
-            color: '#000000',
-            data: [],
-        };
-    }
+function Maps(props) {
+    const [pos, setPos] = useState([48.06869406823506, 3.74459769969682]);
+    const [zoom, _] = useState(12);
+    const [color, setColor] = useState('#000000');
+    const [data, setData] = useState([]);
 
-    async _getData() {
+    async function _getData() {
         const response = await axios.get(
           'http://127.0.0.1:3300/'
         );
@@ -61,39 +55,32 @@ class Maps extends Component {
                 }
             }
         }
-        this.setState({data: dots});
+        setData(dots);
     }
 
-    componentDidMount() {
-        this._getData();
-    }
+    useEffect(()=>{
+        _getData();
+    },[]);
 
-    componentWillUnmount() {
-        //
-    }
-
-    render() {
-        const position = [this.state.lat, this.state.lng];
-
-        return (
-            <div>
-                <MapContainer style={{ height: "100vh" }} center={position} zoom={this.state.zoom}>
-                    <TileLayer
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+    return (
+        <div>
+            <MapContainer style={{ height: "100vh" }} center={pos} zoom={zoom}>
+                <TileLayer
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                />
+                {data.map(data => (
+                    <Circle
+                        center={[data.lat, data.lon]}
+                        pathOptions={{ fillColor: data.color }}
+                        radius={data.radius}
+                        stroke={false}
                     />
-                    {this.state.data.map(data => (
-                        <Circle
-                            center={[data.lat, data.lon]}
-                            pathOptions={{ fillColor: data.color }}
-                            radius={data.radius}
-                            stroke={false}
-                        />
-                    ))}
-                </MapContainer>
-            </div>
-        )
-    }
+                ))}
+            </MapContainer>
+        </div>
+    )
 }
+
 
 export default Maps;

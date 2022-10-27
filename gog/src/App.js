@@ -1,22 +1,18 @@
-import "./App.css";
-import MyMap from "./components/MyMap";
-import Home from "./screen/Home";
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
-  let component;
-  switch (window.location.pathname) {
-    case "/":
-      component = <MyMap />;
-      break;
-    case "/home":
-      component = <Home />;
-      break;
-  }
+import "./App.css";
+import Home from "./screens/Home";
+import Maps from './screens/Result';
+
+
+const App = () => {
   return (
-    <>
-      <div>{component}</div>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/Result/:distance/:angle" element={<Maps />} />
+    </Routes>
   );
-}
+};
+
 
 export default App;
