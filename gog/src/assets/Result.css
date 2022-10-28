@@ -1,0 +1,13 @@
+.back-button {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    bottom: 20px;
+    right: 20px;
+    font-size: 80px;
+    background: black;
+    color: white;
+    border-radius: 100px;
+    border: none;
+    box-shadow: 0 5px 10px #ccc;
+}
