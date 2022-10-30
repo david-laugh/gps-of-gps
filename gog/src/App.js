@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/Result/:distance/:angle" element={<Result />} />
+      <Route path="/Result/:distance/:angle/:lat/:lon" element={<Result />} />
     </Routes>
   );
 };
