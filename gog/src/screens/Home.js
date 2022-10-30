@@ -1,16 +1,26 @@
 import React, { useState } from "react";
+import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet";
 import { useNavigate } from 'react-router-dom';
 
 import "../assets/Home.css";
-import Maps from "../components/Maps";
+// import Map from "../components/Map";
 
 
 function Home(props){
     const [distance, setDistance] = useState(50);
     const [angle, setAngle] = useState(30);
-    // const [lat, setLat] = useState(0);
-    // const [lon, setlon] = useState(0);
+    const [position, setPosition] = useState([51.505, -0.09]);
     const navigate = useNavigate();
+
+    function LocationMarker() {
+        const map = useMapEvents({
+            click: (e) => {
+                const { lat, lng } = e.latlng;
+                setPosition([lat, lng]);
+                //console.log(lat, lng);
+            }
+        });
+    }
 
     function handleDistance(e) {
         setDistance(e.target.value);
@@ -24,7 +34,7 @@ function Home(props){
     
     function handleSubmit(e, history) {
         e.preventDefault();
-        navigate(`/Result/${distance}/${angle}`);
+        navigate(`/Result/${distance}/${angle}/${position[0]}/${position[1]}`);
         console.log("click");
     }
 
@@ -37,7 +47,14 @@ function Home(props){
             <form>
                 <div className="wrapper">
                     <div className="maps">
-                        <Maps></Maps>
+                        <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                            <TileLayer
+                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            <LocationMarker />
+                            <Marker position={position}/>
+                        </MapContainer>
                     </div>
                     <div className="options">
                         <div className="coordinate">
