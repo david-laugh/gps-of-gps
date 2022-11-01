@@ -15,7 +15,7 @@ function Spinner(props) {
         >
             <GridLoader
                 color={"#7cf9df"}
-                size={50}
+                size={30}
                 margin={30}
                 speedMultiplier={1}
             />
