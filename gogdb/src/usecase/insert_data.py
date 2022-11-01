@@ -95,7 +95,7 @@ conn = mariadb.connect(
         host = "127.0.0.1",
         port = 3306,
         user = "root",
-        password = "lksaqwop0921#"
+        password = "YOUR PASSWORD"
     )
 cur = conn.cursor()
 
