@@ -7,7 +7,7 @@ import "../assets/Home.css";
 
 
 function Home(props){
-    const [distance, setDistance] = useState(50);
+    const [distance, setDistance] = useState(25);
     const [angle, setAngle] = useState(30);
     const [position, setPosition] = useState([51.505, -0.09]);
     const navigate = useNavigate();
@@ -64,18 +64,18 @@ function Home(props){
                                     type="range"
                                     id="temp"
                                     name="temp"
-                                    min="10"
-                                    max="50"
-                                    step="10"
+                                    min="5"
+                                    max="25"
+                                    step="5"
                                     list="km"
                                     onClick={handleDistance}
                                 />
                                 <datalist id="km">
+                                    <option value="5km" label="5"></option>
                                     <option value="10km" label="10"></option>
+                                    <option value="15km" label="15"></option>
                                     <option value="20km" label="20"></option>
-                                    <option value="30km" label="30"></option>
-                                    <option value="40km" label="40"></option>
-                                    <option value="50km" label="50"></option>
+                                    <option value="25km" label="25"></option>
                                 </datalist>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ function Home(props){
                         <div className="angle">
                             <div id="angle-txt">각도 :</div>
                             <div id="angle">
-                                <div className="degree-angle">
+                                {/*<div className="degree-angle">
                                     <input
                                     type="radio"
                                     id="30-degree-angle"
@@ -93,7 +93,7 @@ function Home(props){
                                     defaultChecked
                                     ></input>
                                     <label for="30-degree-angle">30°</label>
-                                </div>
+                                </div>*/}
                                 <div className="degree-angle">
                                     <input
                                     type="radio"
@@ -101,10 +101,11 @@ function Home(props){
                                     name="degree-angle"
                                     value="60"
                                     onChange={handleAngle}
+                                    defaultChecked
                                     ></input>
                                     <label for="60-degree-angle">60°</label>
                                 </div>
-                                <div className="degree-angle">
+                                {/*<div className="degree-angle">
                                     <input
                                     type="radio"
                                     id="90-degree-angle"
@@ -113,7 +114,7 @@ function Home(props){
                                     onChange={handleAngle}
                                     ></input>
                                     <label for="90-degree-angle">90°</label>
-                                </div>
+                                </div>*/}
                             </div>
                         </div>
                         {/* angle end */}
