@@ -11,17 +11,17 @@ function Result(props) {
     const params = useParams();
     const navigate = useNavigate();
 
-    const [pos, setPos] = useState([48.06869406823506, 3.74459769969682]);
-    const [zoom, _] = useState(12);
+    const [pos, setPos] = useState([params.lat, params.lon]);
+    const [zoom, _] = useState(10);
     const [item, setItem] = useState([]);
     const [loading, setLoading] = useState(false);
 
     async function _getItem() {
         await axios.get(
-          `http://127.0.0.1:3300/result/${params.distance}/${params.angle}/37/127`
+          `http://127.0.0.1:3300/result/${params.distance}/${params.angle}/${params.lat}/${params.lon}`
         ).then(res => {
             setItem(res.data);
-            // console.log(res);
+            // console.log(res.data);
             setLoading(false);
         });
     }
