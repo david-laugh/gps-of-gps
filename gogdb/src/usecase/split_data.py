@@ -48,7 +48,7 @@ def execute(fname):
 
 if __name__ == "__main__":
     start = time.time()
-    f_list = [fname for fname in os.listdir(DATA_DIR)[:10] if "art" in fname]
+    f_list = [fname for fname in os.listdir(DATA_DIR)[10:100] if "art" in fname]
 
     p = Pool(4)
     p.map(execute, f_list)
