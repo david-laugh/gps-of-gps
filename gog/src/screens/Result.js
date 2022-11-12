@@ -7,6 +7,8 @@ import "../assets/Result.css";
 import Spinner from '../components/Spinner';
 
 
+const REACT_APP_URL = process.env.REACT_APP_URL;
+
 function Result(props) {
     const params = useParams();
     const navigate = useNavigate();
@@ -18,7 +20,7 @@ function Result(props) {
 
     async function _getItem() {
         await axios.get(
-          `http://127.0.0.1:3300/result/${params.distance}/${params.angle}/${params.lat}/${params.lon}`
+          `${REACT_APP_URL}/Result/${params.distance}/${params.angle}/${params.lat}/${params.lon}`
         ).then(res => {
             setItem(res.data);
             // console.log(res.data);
