@@ -13,12 +13,21 @@ function Spinner(props) {
                 height: '100vh',
             }}
         >
-            <GridLoader
-                color={"#7cf9df"}
-                size={30}
-                margin={30}
-                speedMultiplier={1}
-            />
+            <div>
+                <GridLoader
+                    color={"#7cf9df"}
+                    size={30}
+                    margin={30}
+                    speedMultiplier={1}
+                />
+                <div
+                    style={{
+                        textAlign: 'center'
+                    }}
+                >
+                    Loading...
+                </div>
+            </div>
         </div>
     )
 }
