@@ -43,7 +43,8 @@ function Result(props) {
     function ZoomEvents() {
         const map = useMapEvents({
             zoomend: () => {
-                setZoom(map.getZoom());
+                console.log(map.getZoom());
+                // setZoom(map.getZoom());
             },
         });
     }

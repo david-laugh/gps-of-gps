@@ -1,6 +1,0 @@
-docker run -it --rm \
-    --name gogpy \
-    -v /$(pwd):/app \
-    --privileged \
-    gogpy:latest \
-    bash
