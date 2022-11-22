@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import "../assets/Search.css";
@@ -41,7 +41,6 @@ function SideOptionBar(props) {
     useEffect(() => {
         handleKmList();
     });
-    
 
     return (
         <div>
