@@ -1,50 +1,37 @@
-const {app, BrowserWindow} = require('electron');
+const {app,BrowserWindow} = require('electron');
 const path = require('path');
-// const url = require('url');
 
-/*
-Reference :
-https://medium.com/withj-kr/react와-electronjs로-데스크톱-앱-만들어보기-1-프로젝트-세팅하기-6f83562de839
-*/
-// function client() {
-//     const win = new BrowserWindow({
-//         width:1920,
-//         height:1080,
-//         webPreferences: {
-//             nodeIntegration: true,
-//         }
-//     });
+const remote = require('@electron/remote/main');
+remote.initialize();
 
-//     const startUrl = process.env.ELECTRON_START_URL || url.format({
-//         pathname: path.join(__dirname, '/../build/index.html'),
-//         protocol: 'file:',
-//         slashes: true
-//     });
-
-//     win.loadURL(startUrl);
-// }
-
-
-// app.on('ready', client);
 
 function createWindow() {
-    const mainWindow = new BrowserWindow({ width: 1920, height: 1080 });
-    // mainWindow.loadURL('http://localhost:3001');
-    mainWindow.loadFile(path.join(__dirname, '/../../build/index.html'));
+    const win = new BrowserWindow({
+        width: 1920,
+        height: 1080,
+        webPreferences: {
+            enableRemoteModule: true
+        }
+    });
+ 
+    if (process.env.MODE === 'dev') {
+        win.loadURL('http://localhost:3000');
+    } else {
+        win.loadURL(
+            `file://${path.join(__dirname, '../build/index.html')}`);
+    }
+ 
+    remote.enable(win.webContents);
 }
-
-app.whenReady().then(() => {
-    createWindow();
-
-    app.on('activate', () => {
-        if(BrowserWindow.getAllWindows().length === 0){
-            createWindow();
-        }
-    });
-
-    app.on('window-all-closed', () => {
-        if(process.platform !== 'darwin'){ // macOS
-            app.quit();
-        }
-    });
+ 
+app.on('ready', createWindow);
+ 
+app.on('window-all-closed', function() {
+    if(process.platform !== 'darwin') {
+        app.quit();
+    }
+});
+ 
+app.on('activate', function() {
+    if(BrowserWindow.getAllWindows().length === 0) createWindow();
 });
