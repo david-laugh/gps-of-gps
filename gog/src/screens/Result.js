@@ -35,7 +35,7 @@ function Result(props) {
             click: (e) => {
                 const { lat, lng } = e.latlng;
                 setPosition([lat, lng]);
-                //console.log(lat, lng);
+                // console.log(lat, lng);
             }
         });
     }
@@ -43,8 +43,8 @@ function Result(props) {
     function ZoomEvents() {
         const map = useMapEvents({
             zoomend: () => {
-                console.log(map.getZoom());
-                // setZoom(map.getZoom());
+                setZoom(map.getZoom());
+                // console.log(map.getZoom());
             },
         });
     }
