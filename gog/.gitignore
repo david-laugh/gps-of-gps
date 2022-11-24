@@ -29,3 +29,6 @@ yarn-error.log*
 
 # dotenv env file
 .env
+
+# electron-pack
+/dist
