@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import GridLoader  from "react-spinners/GridLoader";
 
 
 function Spinner(props) {
+    const [count, setCount] = useState(0);
+    const [showCount, setShowCount] = useState(false);
+
+    setInterval(() => {
+        setCount(count + 1);
+        // if (count > 10 && showCount === false) {
+        //     setShowCount(true);
+        // }
+    }, 1000);
 
     return (
         <div
@@ -25,7 +34,13 @@ function Spinner(props) {
                         textAlign: 'center'
                     }}
                 >
-                    Loading...
+                    {/*
+                        showCount ?
+                        <div>Loading... {count}sec...</div>
+                        :
+                        <div>Loading...</div>
+                    */}
+                    <div>Loading... {count}sec...</div>
                 </div>
             </div>
         </div>

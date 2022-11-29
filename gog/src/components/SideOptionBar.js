@@ -24,12 +24,14 @@ function SideOptionBar(props) {
     function handleDartSubmit(e, history) {
         e.preventDefault();
         navigate(`/Result/Dart/${distance}/${angle}/${props.position[0]}/${props.position[1]}`);
+        window.location.reload(false);
         // console.log("click");
     }
 
     function handleCenterSubmit(e, history) {
         e.preventDefault();
         navigate(`/Result/Center/${distance}/${angle}/${props.position[0]}/${props.position[1]}`);
+        window.location.reload(false);
         // console.log("click");
     }
 
