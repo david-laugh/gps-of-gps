@@ -15,7 +15,7 @@ function ResultCenter(props) {
     const navigate = useNavigate();
 
     const [position, setPosition] = useState([params.lat, params.lon]);
-    const [zoom, setZoom] = useState(12);
+    const [zoom, setZoom] = useState(13);
     const [item, setItem] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showMarker, setShowMarker] = useState(true);

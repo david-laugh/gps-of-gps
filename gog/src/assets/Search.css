@@ -78,9 +78,10 @@ input[type="range"] {
   border: none;
   border-radius: 5em;
   height: 2.8em;
+  width: 10em;
 
   float: right;
-  margin: 5em 0.5em 3em;
+  margin: 1em 0.5em 0em;
   padding: 0 1.8em;
 
   font-size: medium;

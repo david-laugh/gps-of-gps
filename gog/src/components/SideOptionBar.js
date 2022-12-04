@@ -98,7 +98,7 @@ function SideOptionBar(props) {
                         className="btn"
                         onClick={handleDartSubmit}
                     >
-                        DartSubmit
+                        Dart
                         {props.value}
                     </button>
                     <button
@@ -106,7 +106,7 @@ function SideOptionBar(props) {
                         className="btn"
                         onClick={handleCenterSubmit}
                     >
-                        CenterSubmit
+                        One Count
                         {props.value}
                     </button>
                 </div>

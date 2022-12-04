@@ -8,7 +8,7 @@ import "../assets/Search.css";
 
 function Search(props){
     const [position, setPosition] = useState([51.505, -0.09]);
-    const [zoom, _] = useState(12);
+    const [zoom, _] = useState(13);
 
     function LocationMarker() {
         const map = useMapEvents({
