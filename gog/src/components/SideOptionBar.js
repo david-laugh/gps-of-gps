@@ -21,18 +21,26 @@ function SideOptionBar(props) {
         // console.log(e.target.value);
     }
     
-    function handleSubmit(e, history) {
+    function handleDartSubmit(e, history) {
         e.preventDefault();
-        navigate(`/Result/${distance}/${angle}/${props.position[0]}/${props.position[1]}`);
+        navigate(`/Result/Dart/${distance}/${angle}/${props.position[0]}/${props.position[1]}`);
+        window.location.reload(false);
+        // console.log("click");
+    }
+
+    function handleCenterSubmit(e, history) {
+        e.preventDefault();
+        navigate(`/Result/Center/${distance}/${angle}/${props.position[0]}/${props.position[1]}`);
+        window.location.reload(false);
         // console.log("click");
     }
 
     function handleKmList() {
-        if (props.zoom > 11 && prevZoom <= 11) {
+        if (props.zoom > 13 && prevZoom <= 13) {
             setKmList([1, 2, 3, 4, 5]);
             setPrevZoom(props.zoom);
         }
-        if (props.zoom <= 11 && prevZoom > 11) {
+        if (props.zoom <= 13 && prevZoom > 13) {
             setKmList([5, 10, 15, 20, 25]);
             setPrevZoom(props.zoom);
         }
@@ -73,12 +81,12 @@ function SideOptionBar(props) {
                     <div id="angle">
                         <div className="degree-angle">
                             <input
-                            type="radio"
-                            id="30-degree-angle"
-                            name="degree-angle"
-                            value="30"
-                            onChange={handleAngle}
-                            defaultChecked
+                                type="radio"
+                                id="30-degree-angle"
+                                name="degree-angle"
+                                value="30"
+                                onChange={handleAngle}
+                                defaultChecked
                             ></input>
                             <label for="30-degree-angle">30°</label>
                         </div>
@@ -88,9 +96,17 @@ function SideOptionBar(props) {
                     <button
                         type="submit"
                         className="btn"
-                        onClick={handleSubmit}
+                        onClick={handleDartSubmit}
                     >
-                        Submit
+                        Dartboard-shaped Space Division
+                        {props.value}
+                    </button>
+                    <button
+                        type="submit"
+                        className="btn"
+                        onClick={handleCenterSubmit}
+                    >
+                        Dartboard Map
                         {props.value}
                     </button>
                 </div>

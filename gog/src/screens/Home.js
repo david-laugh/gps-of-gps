@@ -9,14 +9,16 @@ function Home() {
 
     return (
         <div className="Home">
-            <div>GPS OF GPS</div>
-            <button
-                type="button"
-                className="Home_btn"
-                onClick={() => navigate("/Search")}
-            >
-                START
-            </button>
+            <div className="Content">
+                <div>GPS OF GPS</div>
+                <button
+                    type="button"
+                    className="Home_btn"
+                    onClick={() => navigate("/Search")}
+                >
+                    START
+                </button>
+            </div>
         </div>
     );
 }

@@ -3,7 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import "./App.css";
 import Home from "./screens/Home";
 import Search from './screens/Search';
-import Result from './screens/Result';
+import ResultDart from './screens/ResultDart';
+import ResultCenter from './screens/ResultCenter';
 
 
 const App = () => {
@@ -11,7 +12,8 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Search" element={<Search />} />
-      <Route path="/Result/:distance/:angle/:lat/:lon" element={<Result />} />
+      <Route path="/Result/Dart/:distance/:angle/:lat/:lon" element={<ResultDart />} />
+      <Route path="/Result/Center/:distance/:angle/:lat/:lon" element={<ResultCenter />} />
     </Routes>
   );
 };
