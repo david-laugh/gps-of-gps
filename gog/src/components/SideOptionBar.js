@@ -98,7 +98,7 @@ function SideOptionBar(props) {
                         className="btn"
                         onClick={handleDartSubmit}
                     >
-                        Dart
+                        Dartboard-shaped Space Division
                         {props.value}
                     </button>
                     <button
@@ -106,7 +106,7 @@ function SideOptionBar(props) {
                         className="btn"
                         onClick={handleCenterSubmit}
                     >
-                        One Count
+                        Dartboard Map
                         {props.value}
                     </button>
                 </div>

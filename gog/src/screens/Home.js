@@ -11,7 +11,6 @@ function Home() {
         <div className="Home">
             <div className="Content">
                 <div>GPS OF GPS</div>
-                <div>GPS of GPS는 </div>
                 <button
                     type="button"
                     className="Home_btn"
